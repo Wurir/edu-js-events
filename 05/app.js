@@ -9,6 +9,14 @@ const stats = {
 
 /* tutaj umieść swój kod */
 
+const pList = document.querySelectorAll('p')
+
+pList.forEach(function(pEl){
+    pEl.addEventListener('click', function(e){
+        console.log(pEl)
+    })
+})
+
 
 /* nie modyfikuj kodu poniżej, ale przeanalizuj go */
 
