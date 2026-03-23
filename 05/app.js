@@ -18,8 +18,8 @@ const handleClick = function (e) {
     const clickedTarget = e.target
 
     if (clickedTarget.tagName === 'A') {
-        const path = getUrlPathname(clickedTarget.href)
-        updateLinks(path)
+        const href = clickedTarget.getAttribute('href')
+        updateLinks(href)
     } else if (clickedTarget === clickedParagraph) {
         updateParagraph(clickedParagraph)
     }
@@ -28,13 +28,6 @@ const handleClick = function (e) {
 pList.forEach(function (pEl) {
     pEl.addEventListener('click', handleClick)})
 
-
-const getUrlPathname = function (href) {
-    const url = new URL(href)
-    const path = url.pathname
-
-    return path
-}
 
 const updateLinks = function (path) {
     if (!stats.links[path]) {
