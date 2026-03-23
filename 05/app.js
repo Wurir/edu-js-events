@@ -11,41 +11,42 @@ const stats = {
 
 const pList = document.querySelectorAll('p')
 
-pList.forEach(function(pEl){
-    pEl.addEventListener('click', function(e){
-        e.preventDefault()
+const handleClick = function (e) {
+    e.preventDefault()
 
-        const clickedParagraph = e.currentTarget
-        const clickedTarget = e.target
+    const clickedParagraph = e.currentTarget
+    const clickedTarget = e.target
 
-        if(clickedTarget.tagName === 'A'){
-            const path = getUrlPathname(clickedTarget.href)
-            updateLinks(path)     
-        }else if(clickedTarget === clickedParagraph){
-            updateParagraph(clickedParagraph)
-        }
-        
-    })
-})
+    if (clickedTarget.tagName === 'A') {
+        const path = getUrlPathname(clickedTarget.href)
+        updateLinks(path)
+    } else if (clickedTarget === clickedParagraph) {
+        updateParagraph(clickedParagraph)
+    }
+}
 
-const getUrlPathname = function(href){
+pList.forEach(function (pEl) {
+    pEl.addEventListener('click', handleClick)})
+
+
+const getUrlPathname = function (href) {
     const url = new URL(href)
     const path = url.pathname
-    
+
     return path
 }
 
-const updateLinks = function(path){
-    if(!stats.links[path]){
+const updateLinks = function (path) {
+    if (!stats.links[path]) {
         stats.links[path] = 0
     }
     stats.links[path]++
 }
 
-const updateParagraph = function(paragraph){
+const updateParagraph = function (paragraph) {
     const paraId = paragraph.dataset.id
 
-    if(!stats.paragraphs[paraId]){
+    if (!stats.paragraphs[paraId]) {
         stats.paragraphs[paraId] = 0
     }
     stats.paragraphs[paraId]++
@@ -54,23 +55,23 @@ const updateParagraph = function(paragraph){
 /* nie modyfikuj kodu poniżej, ale przeanalizuj go */
 
 const statsElement = document.querySelector('.stats');
-const fireCustomEvent = function(element, name) {
+const fireCustomEvent = function (element, name) {
     console.log(element, '=>', name);
 
     const event = new CustomEvent(name, {
         bubbles: true,
     });
 
-    element.dispatchEvent( event );
+    element.dispatchEvent(event);
 }
 
-const renderStats = function(data, element) {
+const renderStats = function (data, element) {
     let html = '';
-    for(let elementType in data) {
+    for (let elementType in data) {
         html += '<ul>';
 
-        for(let key in data[elementType]) {
-            
+        for (let key in data[elementType]) {
+
             html += '<li>';
             html += key + ' -> ' + data[elementType][key];
             html += '</li>';
@@ -83,9 +84,9 @@ const renderStats = function(data, element) {
 }
 
 
-document.addEventListener('click', function(e) {
+document.addEventListener('click', function (e) {
     const tagName = e.target.tagName;
-    if(tagName.includes('P') || tagName.includes('A')) {
+    if (tagName.includes('P') || tagName.includes('A')) {
         fireCustomEvent(statsElement, 'render');
     }
 });
