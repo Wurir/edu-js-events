@@ -13,10 +13,25 @@ const pList = document.querySelectorAll('p')
 
 pList.forEach(function(pEl){
     pEl.addEventListener('click', function(e){
-        console.log(pEl)
+        e.preventDefault()
+
+        const clickedParagraph = e.currentTarget
+        const clickedTarget = e.target
+
+        if(clickedTarget.tagName === 'A'){
+            const path = getUrlPathname(clickedTarget.href)
+            console.log(path);
+        }
+        
     })
 })
 
+const getUrlPathname = function(href){
+    const url = new URL(href)
+    const path = url.pathname
+    
+    return path
+}
 
 /* nie modyfikuj kodu poniżej, ale przeanalizuj go */
 
