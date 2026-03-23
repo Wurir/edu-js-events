@@ -18,6 +18,8 @@ pList.forEach(function(pEl){
         const clickedParagraph = e.currentTarget
         const clickedTarget = e.target
 
+        updateParagraph(clickedParagraph)
+
         if(clickedTarget.tagName === 'A'){
             const path = getUrlPathname(clickedTarget.href)
             updateLinks(path)     
@@ -38,6 +40,15 @@ const updateLinks = function(path){
         stats.links[path] = 0
     }
     stats.links[path]++
+}
+
+const updateParagraph = function(paragraph){
+    const paraId = paragraph.dataset.id
+    
+    if(!stats.paragraphs[paraId]){
+        stats.paragraphs[paraId] = 0
+    }
+    stats.paragraphs[paraId]++
 }
 
 /* nie modyfikuj kodu poniżej, ale przeanalizuj go */
