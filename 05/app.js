@@ -20,7 +20,7 @@ pList.forEach(function(pEl){
 
         if(clickedTarget.tagName === 'A'){
             const path = getUrlPathname(clickedTarget.href)
-            console.log(path);
+            updateLinks(path)     
         }
         
     })
@@ -31,6 +31,13 @@ const getUrlPathname = function(href){
     const path = url.pathname
     
     return path
+}
+
+const updateLinks = function(path){
+    if(!stats.links[path]){
+        stats.links[path] = 0
+    }
+    stats.links[path]++
 }
 
 /* nie modyfikuj kodu poniżej, ale przeanalizuj go */
