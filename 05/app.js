@@ -22,18 +22,18 @@ function handleClick(e) {
     const clickedTarget = e.target
 
     if (clickedTarget.tagName === 'A') {
-        const href = clickedTarget.getAttribute('href')
-        updateLinks(href)
+        updateLinks(clickedTarget)
     } else if (clickedTarget === clickedParagraph) {
         updateParagraph(clickedParagraph)
     }
 }
 
-function updateLinks(path) {
-    if (!stats.links[path]) {
-        stats.links[path] = 0
+function updateLinks(linkEl) {
+    const href = linkEl.getAttribute('href')
+    if (!stats.links[href]) {
+        stats.links[href] = 0
     }
-    stats.links[path]++
+    stats.links[href]++
 }
 
 function updateParagraph(paragraph) {
