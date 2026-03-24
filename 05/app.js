@@ -18,19 +18,16 @@ pList.forEach(function (pEl) {
 function handleClick(e) {
     e.preventDefault()
 
-    const clickedParagraph = e.currentTarget
-    const clickedTarget = e.target
-
-    if (clickedTarget.tagName === 'A') {
-        updateLinks(clickedTarget)
-    } else if (clickedTarget === clickedParagraph) {
-        updateParagraph(clickedParagraph)
+    if (e.target.tagName === 'A') {
+        updateLinks(e.target)
+    } else if (e.target.tagName === 'P') {
+        updateParagraph(e.target)
     }
 }
 
 function updateLinks(linkEl) {
     const href = linkEl.getAttribute('href')
-    if (!stats.links[href]) {
+    if (typeof stats.links[href] === 'undefined') {
         stats.links[href] = 0
     }
     stats.links[href]++
@@ -39,7 +36,7 @@ function updateLinks(linkEl) {
 function updateParagraph(paragraph) {
     const paraId = paragraph.dataset.id
 
-    if (!stats.paragraphs[paraId]) {
+    if (typeof stats.paragraphs[paraId] === 'undefined') {
         stats.paragraphs[paraId] = 0
     }
     stats.paragraphs[paraId]++
