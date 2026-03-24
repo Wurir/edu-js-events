@@ -11,7 +11,11 @@ const stats = {
 
 const pList = document.querySelectorAll('p')
 
-const handleClick = function (e) {
+pList.forEach(function (pEl) {
+    pEl.addEventListener('click', handleClick)
+})
+
+function handleClick(e) {
     e.preventDefault()
 
     const clickedParagraph = e.currentTarget
@@ -25,18 +29,14 @@ const handleClick = function (e) {
     }
 }
 
-pList.forEach(function (pEl) {
-    pEl.addEventListener('click', handleClick)})
-
-
-const updateLinks = function (path) {
+function updateLinks(path) {
     if (!stats.links[path]) {
         stats.links[path] = 0
     }
     stats.links[path]++
 }
 
-const updateParagraph = function (paragraph) {
+function updateParagraph(paragraph) {
     const paraId = paragraph.dataset.id
 
     if (!stats.paragraphs[paraId]) {
